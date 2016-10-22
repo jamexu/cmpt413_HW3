@@ -20,6 +20,10 @@ def get_args():
     return opts
 
 def get_condprob_dict(fe_data, num_iterations):
+    '''
+    generates a dictionary of conditional probabilities on the given data
+    the keys of the dictionary take the form of tuples (f,e) for the value of P(f | e)
+    '''
 
     e_count = defaultdict(float)
     fe_count = defaultdict(float)
@@ -33,7 +37,6 @@ def get_condprob_dict(fe_data, num_iterations):
     for (n, (f, e)) in enumerate(fe_data):
         f_vocab.update(set(f))
 
-    #f_vocab_set = set(f_vocab)
     default_prob = 1.0 / len(f_vocab)
 
 
