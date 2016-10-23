@@ -1,3 +1,4 @@
+
 #!/usr/bin/env python
 import optparse, sys, os, logging
 from collections import defaultdict
@@ -75,6 +76,19 @@ def main(opts):
     bitext = [[sentence.strip().split() for sentence in pair] for pair in zip(open(f_data), open(e_data))[:opts.num_sents]]
 
     prob_f_given_e = get_condprob_dict(bitext, opts.iterations)
+
+
+
+    for (f, e) in bitext:
+        for (i, f_i) in enumerate(f):
+            bestp=0
+            bestj=0
+            for (j, e_j) in enumerate(e):
+                if prob_f_given_e[(f_i,e_j)]>bestp:
+                    bestp=prob_f_given_e[(f_i,e_j)]
+                    bestj=j
+            sys.stdout.write("%i-%i " % (i,j))
+        sys.stdout.write("\n")
 
 
 
